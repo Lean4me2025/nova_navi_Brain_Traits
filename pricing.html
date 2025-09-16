@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services & Pricing • NAVI</title>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>NAVI Services & Pricing</h1>
+    <audio id="naviAudio" preload="auto" src="/assets/audio/navi-intro.wav"></audio>
+    <p class="lead">Choose the level that fits your journey. Links open in a new tab.</p>
+    <div class="pricing grid">
+      <a class="tier" href="https://payhip.com/" target="_blank" rel="noopener">
+        <h3>Starter — $29</h3>
+        <div class="small">Resume tune-up & quick guidance</div>
+      </a>
+      <a class="tier" href="https://payhip.com/" target="_blank" rel="noopener">
+        <h3>Pro — $99</h3>
+        <div class="small">Resume + cover letter + 1:1 pointers</div>
+      </a>
+      <a class="tier" href="https://payhip.com/" target="_blank" rel="noopener">
+        <h3>Pro Series — $149</h3>
+        <div class="small">Everything in Pro + deep role targeting</div>
+      </a>
+    </div>
+    <div style="margin-top:1rem">
+      <a class="btn" href="/book.html">Purpose Book</a>
+      <a class="btn" href="/traits.html">Back to Traits</a>
+    </div>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', async ()=>{
+      const a = document.getElementById('naviAudio');
+      try{ await a.play(); }catch(e){}
+    });
+  </script>
+</body>
+</html>
