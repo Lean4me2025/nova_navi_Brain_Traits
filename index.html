@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA + NAVI</title>
+  <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>NOVA + NAVI Integrated</h1>
+    <p>Discover your purpose. Choose your plan. Step into your future.</p>
+  </header>
+
+  <!-- Audio Intros -->
+  <audio id="novaIntro" preload="auto">
+    <source src="assets/audio/nova_intro.m4a" type="audio/mp4">
+    <source src="assets/audio/nova_intro.wav" type="audio/wav">
+    <source src="assets/audio/nova_intro.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="naviIntro" preload="auto">
+    <source src="assets/audio/navi_intro.m4a" type="audio/mp4">
+    <source src="assets/audio/navi_intro.wav" type="audio/wav">
+    <source src="assets/audio/navi_intro.mp3" type="audio/mpeg">
+  </audio>
+  <button id="novaIntroBtn" style="display:none" onclick="document.getElementById('novaIntro').play()">Play Nova Intro</button>
+  <button id="naviIntroBtn" style="display:none" onclick="document.getElementById('naviIntro').play()">Play Navi Intro</button>
+
+  <!-- Plans -->
+  <section>
+    <h2>Choose Your Plan</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Starter Plan – $29.99/mo</h3>
+        <a href="https://payhip.com/b/GdfU7" class="payhip-buy-button" data-theme="green" data-product="GdfU7">Buy Now</a>
+      </div>
+      <div class="plan">
+        <h3>Pro Plan – $99/mo</h3>
+        <a href="https://payhip.com/b/knC1Z" class="payhip-buy-button" data-theme="green" data-product="knC1Z">Buy Now</a>
+      </div>
+      <div class="plan">
+        <h3>Pro Suite Plan – $149/mo</h3>
+        <a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOVA Brains -->
+  <section>
+    <h2>NOVA Brains – Explore Roles</h2>
+    <script type="application/json" id="novaBrains">
+    {
+      "roles": [
+        { "soc": "15-1252", "title": "Software Developer", "median_wage_usd": 132270, "traits": ["Analytical","Problem-Solving"], "skills": ["Python","JavaScript"] },
+        { "soc": "11-1021", "title": "General & Operations Manager", "median_wage_usd": 103840, "traits": ["Leadership","Communication"], "skills": ["Budgeting","Process Improvement"] }
+      ]
+    }
+    </script>
+    <input id="q" placeholder="Search roles..." oninput="renderRoles()">
+    <div id="results"></div>
+  </section>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    function tryPlay(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const p = el.play();
+      if (p && typeof p.then === 'function') {
+        p.catch(() => document.getElementById(id + 'Btn').style.display = 'inline-block');
+      }
+    }
+    tryPlay('novaIntro');
+    setTimeout(() => tryPlay('naviIntro'), 5000);
+
+    const data = JSON.parse(document.getElementById('novaBrains').textContent).roles;
+    function renderRoles() {
+      const q = document.getElementById('q').value.toLowerCase();
+      const out = data.filter(r => !q || r.title.toLowerCase().includes(q) || r.soc.includes(q))
+        .map(r => `<div><strong>${r.title}</strong> (${r.soc}) – $${r.median_wage_usd}</div>`).join('');
+      document.getElementById('results').innerHTML = out || "<i>No matches</i>";
+    }
+    renderRoles();
+  </script>
+</body>
+</html>
